@@ -149,6 +149,8 @@ def main(args=None):
 
             _ = world.tick()
 
+            if total_frames == 0: node.vehicle.set_autopilot(True)
+
             total_frames += 1
 
     except Exception as e:
