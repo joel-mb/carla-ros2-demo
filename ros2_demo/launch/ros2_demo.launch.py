@@ -23,6 +23,11 @@ def generate_launch_description():
             }]
         ),
         launch_ros.actions.Node(
+            package='color_converter',
+            executable='color_converter',
+            name='color_converter'
+        ),
+        launch_ros.actions.Node(
             package='rviz2',
             executable='rviz2',
             name='rviz2',

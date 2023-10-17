@@ -145,7 +145,7 @@ def main(args=None):
 
         #while total_frames < DURATION_TICKS:
         while True:
-            node.get_logger().info(">>> Tick...".format(SKIP_TICKS)) 
+            # node.get_logger().info(">>> Tick...".format(SKIP_TICKS)) 
 
             _ = world.tick()
 

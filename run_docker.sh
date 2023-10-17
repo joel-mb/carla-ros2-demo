@@ -17,6 +17,7 @@ ${SCRIPT_DIR}/_utils/docker-gui \
     --volume=${CARLA_ROOT}/PythonAPI:/workspace/CARLA/PythonAPI:ro \
     --volume ${SCRIPT_DIR}/_config:/config \
     --volume=${SCRIPT_DIR}/ros2_demo:/workspace/ws/src/ros2_demo:rw \
+    --volume=${SCRIPT_DIR}/color_converter:/workspace/ws/src/color_converter:rw \
     -e FASTRTPS_DEFAULT_PROFILES_FILE=/config/fastrtps-profile.xml \
     carla_ros2_demo:latest /bin/bash
 
