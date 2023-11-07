@@ -10,9 +10,16 @@ import rclpy
 import rclpy.node
 import rclpy.qos
 
-import carla
+import tf2_ros
 
-from sensor_msgs.msg import Image, PointCloud2
+import carla
+import math
+
+from builtin_interfaces.msg import Time
+from geometry_msgs.msg import Vector3, Quaternion, Transform, TransformStamped
+from std_msgs.msg import Header
+
+from transforms3d.euler import euler2quat
 
 THRESHOLD = 0.001
 SKIP_TICKS = 100
@@ -99,17 +106,6 @@ class ROS2Stack(rclpy.node.Node):
 
             sensors[-1].enable_for_ros()
 
-            # topic_name = "/carla/{}/{}".format(VEHICLE_CONFIGURATION["id"], sensor["id"])
-            # if sensor["ros"]["name"]:
-            #     topic_name += "/" + sensor["ros"]["name"] 
-
-            # self.create_subscription(
-            #     sensor["ros"]["msg"],
-            #     topic_name,
-            #     self._callback,
-            #     qos_profile=10
-            # )
-
         return sensors
 
     def destroy_node(self):
@@ -139,17 +135,41 @@ def main(args=None):
     spin_thread = threading.Thread(target=rclpy.spin, args=(node, ), daemon=True)
     spin_thread.start()
 
+    tf_broadcaster = tf2_ros.TransformBroadcaster(node)
+
     total_frames = 0
 
     try:
 
-        #while total_frames < DURATION_TICKS:
         while True:
-            # node.get_logger().info(">>> Tick...".format(SKIP_TICKS)) 
 
             _ = world.tick()
+            snapshot = world.get_snapshot()
 
             if total_frames == 0: node.vehicle.set_autopilot(True)
+
+            # Publish ego tf
+            sec = snapshot.timestamp.elapsed_seconds
+            _time = Time(sec=int(sec), nanosec=int((sec - int(sec)) * 1000000000))
+            
+            quat = euler2quat(
+                math.radians(node.vehicle.get_transform().rotation.roll),
+                -math.radians(node.vehicle.get_transform().rotation.pitch),
+                -math.radians(node.vehicle.get_transform().rotation.yaw)
+            )
+            _transform = Transform()
+            _transform.translation = Vector3(x=node.vehicle.get_transform().location.x, y=-node.vehicle.get_transform().location.y, z=node.vehicle.get_transform().location.z)
+            _transform.rotation = Quaternion(w=quat[0], x=quat[1], y=quat[2], z=quat[3])
+
+            tf_broadcaster.sendTransform(TransformStamped(
+                header=Header(frame_id="map", stamp=_time),
+                child_frame_id="hero",
+                transform=_transform)
+            )
+
+            # Check ROS time
+            if abs(node.get_clock().now().nanoseconds * 1e-9 - snapshot.timestamp.elapsed_seconds) > 0.0001:
+                node.get_logger().warn("The clock is not synchronized")
 
             total_frames += 1
 
