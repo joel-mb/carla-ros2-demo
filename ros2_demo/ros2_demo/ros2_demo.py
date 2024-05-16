@@ -78,8 +78,8 @@ class ROS2Stack(rclpy.node.Node):
             self.get_logger().info("Spawning sensor: {}".format(sensor))
 
             bp = self._blueprint_library.filter(sensor.get("type"))[0]
-            bp.set_attribute("ros_name", sensor.get("id")) 
-            bp.set_attribute("role_name", sensor.get("id")) 
+#            bp.set_attribute("ros_name", sensor.get("id"))
+#            bp.set_attribute("role_name", sensor.get("id"))
             for key, value in sensor.get("attributes", {}).items():
                 bp.set_attribute(str(key), str(value))
 
@@ -104,7 +104,7 @@ class ROS2Stack(rclpy.node.Node):
                 )
             )
 
-            sensors[-1].enable_for_ros()
+#            sensors[-1].enable_for_ros()
 
         return sensors
 
@@ -169,7 +169,7 @@ def main(args=None):
 
             # Check ROS time
             if abs(node.get_clock().now().nanoseconds * 1e-9 - snapshot.timestamp.elapsed_seconds) > 0.0001:
-                node.get_logger().warn("The clock is not synchronized")
+                node.get_logger().warn("The clock is not synchronized; ros-time ({}) python-time ({}) ".format(node.get_clock().now().nanoseconds, snapshot.timestamp.elapsed_seconds))
 
             total_frames += 1
 
