@@ -122,8 +122,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/rgb/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/rgb/front/image
           Value: true
         - Class: rviz_default_plugins/Image
           Enabled: true
@@ -136,8 +136,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/depth/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/depth/front/image
           Value: true
         - Class: rviz_default_plugins/Image
           Enabled: true
@@ -150,8 +150,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/dvs/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/dvs/front/image
           Value: true
         - Class: rviz_default_plugins/Image
           Enabled: true
@@ -164,8 +164,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/instance_segmentation/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/instance_segmentation/front/image
           Value: true
         - Class: rviz_default_plugins/Image
           Enabled: true
@@ -178,8 +178,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/semantic_segmentation/cityscapes/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/semantic_segmentation/front/image
           Value: true
         - Class: rviz_default_plugins/Image
           Enabled: true
@@ -192,8 +192,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/optical_flow/image
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/optical_flow/front/image
           Value: true
       Enabled: true
       Name: Cameras
@@ -227,8 +227,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/lidar
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/lidar/front
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -260,8 +260,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/semantic_lidar
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/semantic_lidar/front
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
@@ -297,8 +297,8 @@ Visualization Manager:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
-            Reliability Policy: Reliable
-            Value: /carla/hero/radar_front
+            Reliability Policy: Best Effort
+            Value: /carla/vehicles/hero/sensors/radar/default
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
