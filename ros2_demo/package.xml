@@ -13,6 +13,7 @@
   <test_depend>python3-pytest</test_depend>
 
   <exec_depend>carla_msgs</exec_depend>
+  <exec_depend>color_converter</exec_depend>
 
   <export>
     <build_type>ament_python</build_type>
