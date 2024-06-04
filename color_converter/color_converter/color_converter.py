@@ -56,8 +56,8 @@ class ColorConverter(rclpy.node.Node):
 
         # _input = self.get_parameter('input').get_parameter_value().string_value
         # _output = self.get_parameter('ouput').get_parameter_value().string_value
-        _input = "/carla/hero/semantic_segmentation/image"
-        _output = "/carla/hero/semantic_segmentation/cityscapes/image"
+        _input = "/carla/vehicles/hero/sensors/semantic_segmentation/front/image"
+        _output = "/carla/vehicles/hero/sensors/semantic_segmentation/front/cityscapes/image"
         
         self._subscriber = self.create_subscription(Image, _input, self._callback, 10)
         self._publisher = self.create_publisher(Image, _output, 1)
