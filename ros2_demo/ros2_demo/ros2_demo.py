@@ -150,7 +150,7 @@ def main(args=None):
             _ = world.tick()
             snapshot = world.get_snapshot()
 
-            #if total_frames == 0: node.vehicle.set_autopilot(True)
+            if total_frames == 0: node.vehicle.set_autopilot(True)
 
             # Publish ego tf
             #sec = snapshot.timestamp.elapsed_seconds
