@@ -7,6 +7,7 @@ import array
 
 import rclpy
 import rclpy.node
+from rclpy.qos import QoSDurabilityPolicy, QoSProfile, QoSReliabilityPolicy
 
 from sensor_msgs.msg import Image
 
@@ -59,8 +60,16 @@ class ColorConverter(rclpy.node.Node):
         _input = "/carla/vehicles/hero/sensors/semantic_segmentation/front/image"
         _output = "/carla/vehicles/hero/sensors/semantic_segmentation/front/cityscapes/image"
         
-        self._subscriber = self.create_subscription(Image, _input, self._callback, 10)
-        self._publisher = self.create_publisher(Image, _output, 1)
+        qos = QoSProfile(depth=10)
+        qos.durability = QoSDurabilityPolicy.VOLATILE
+        qos.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        self._subscriber = self.create_subscription(Image, _input, self._callback, qos)
+
+        qos = QoSProfile(depth=1)
+        qos.durability = QoSDurabilityPolicy.VOLATILE
+        qos.reliability = QoSReliabilityPolicy.BEST_EFFORT
+        self._publisher = self.create_publisher(Image, _output, 
+                                                qos_profile=qos)
 
     def _callback(self, data):
         cityscapes = data
