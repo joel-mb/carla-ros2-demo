@@ -1,3 +1,6 @@
 [submodule "_submodules/carla_msgs"]
 	path = _submodules/carla_msgs
 	url = https://github.com/carla-simulator/ros-carla-msgs
+[submodule "_submodules/etsi_its_messages"]
+	path = _submodules/etsi_its_messages
+	url = https://github.com/ika-rwth-aachen/etsi_its_messages
